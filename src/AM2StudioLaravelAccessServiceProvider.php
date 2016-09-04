@@ -27,6 +27,8 @@ class AM2StudioLaravelAccessServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind('Access', function($app) {
+            return new AM2StudioLaravelAccess;
+        });
     }
 }

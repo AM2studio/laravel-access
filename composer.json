@@ -1,0 +1,15 @@
+{
+    "name": "am2studio/laravel-access",
+    "description": "Roles and permissions package",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marko Samec",
+            "email": "marko.schamec@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "require-dev": {}
+}

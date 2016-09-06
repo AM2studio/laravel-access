@@ -18,7 +18,7 @@ class Role extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['key', 'description', 'model'];
+    protected $fillable = ['name', 'slug', 'description', 'model'];
 
     /**
      * The attributes excluded from the model's JSON form.

@@ -1,18 +1,22 @@
 <?php
 
-namespace AM2Studio\LaravelAccess;
+namespace AM2Studio\LaravelAccess\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
 
-class Permission extends Model  {
+/**
+ * Class Role
+ * @package AM2Studio\LaravelAccess
+ */
+class Role extends Model  {
 
     /**
      * The database table used by the model.
      *
      * @var string
      */
-    protected $table = 'permissions';
+    protected $table = 'roles';
 
     /**
      * Attributes that should be mass-assignable.
@@ -42,6 +46,10 @@ class Permission extends Model  {
      */
     protected $dates = [];
 
+    /**
+     * @param array $attributes
+     * @return static
+     */
     public static function create(array $attributes = [])
     {
         if(!isset($attributes['model']) || !$attributes['model'] instanceof Model) {
@@ -52,5 +60,6 @@ class Permission extends Model  {
 
         return parent::create($attributes);
     }
+
 
 }

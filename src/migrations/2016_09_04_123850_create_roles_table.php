@@ -20,6 +20,8 @@ class CreateRolesTable extends Migration
             $table->mediumText('description');
             $table->string('model')->nullable();
             $table->timestamps();
+
+            $table->unique(['slug', 'model']);
         });
     }
 

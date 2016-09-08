@@ -3,7 +3,12 @@
 namespace AM2Studio\LaravelAccess;
 
 use Illuminate\Database\Eloquent\Model;
+use InvalidArgumentException;
 
+/**
+ * Class Role
+ * @package AM2Studio\LaravelAccess
+ */
 class Role extends Model  {
 
     /**
@@ -40,5 +45,21 @@ class Role extends Model  {
      * @var array
      */
     protected $dates = [];
+
+    /**
+     * @param array $attributes
+     * @return static
+     */
+    public static function create(array $attributes = [])
+    {
+        if(!isset($attributes['model']) || !$attributes['model'] instanceof Model) {
+            throw new InvalidArgumentException('Parameter "model" must be an instance of Eloquent model!');
+        }
+
+        $attributes['model'] = get_class($attributes['model']);
+
+        return parent::create($attributes);
+    }
+
 
 }

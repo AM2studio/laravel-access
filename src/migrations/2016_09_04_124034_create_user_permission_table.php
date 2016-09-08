@@ -25,7 +25,7 @@ class CreateUserPermissionTable extends Migration
                 ->references('id')->on('permissions')
                 ->onDelete('restrict')
                 ->onUpdate('cascade');
-            $table->morphs('model');
+            $table->unsignedInteger('model_id')->nullable();
             $table->timestamps();
         });
     }

@@ -52,11 +52,13 @@ class Role extends Model  {
      */
     public static function create(array $attributes = [])
     {
-        if(!isset($attributes['model']) || !$attributes['model'] instanceof Model) {
+        if(isset($attributes['model']) && !$attributes['model'] instanceof Model) {
             throw new InvalidArgumentException('Parameter "model" must be an instance of Eloquent model!');
         }
 
-        $attributes['model'] = get_class($attributes['model']);
+        if(isset($attributes['model'])) {
+            $attributes['model'] = get_class($attributes['model']);
+        }
 
         return parent::create($attributes);
     }

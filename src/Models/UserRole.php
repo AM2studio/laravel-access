@@ -18,7 +18,7 @@ class UserRole extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['user_id', 'role_id', 'model_id'];
+    protected $fillable = ['user_id', 'role_id', 'model_id', 'model_type'];
 
     /**
      * The attributes excluded from the model's JSON form.

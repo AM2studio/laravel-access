@@ -25,7 +25,7 @@ class CreateUserRoleTable extends Migration
                 ->references('id')->on('roles')
                 ->onDelete('restrict')
                 ->onUpdate('cascade');
-            $table->unsignedInteger('model_id');
+            $table->morphs('model');
             $table->timestamps();
         });
     }

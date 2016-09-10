@@ -2,6 +2,7 @@
 
 namespace AM2Studio\LaravelAccess;
 
+use AM2Studio\LaravelAccess\Models\Permission;
 use AM2Studio\LaravelAccess\Models\Role;
 
 class AM2StudioLaravelAccess
@@ -10,6 +11,15 @@ class AM2StudioLaravelAccess
     {
         $role = Role::find($role);
         if($role->model != $this->getClassName($model)) {
+            return false;
+        }
+        return true;
+    }
+
+    public function permissionHasModel($permission, $model = null)
+    {
+        $permission = Permission::find($permission);
+        if($permission->model != $this->getClassName($model)) {
             return false;
         }
         return true;

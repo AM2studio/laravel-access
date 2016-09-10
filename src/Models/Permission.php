@@ -2,10 +2,12 @@
 
 namespace AM2Studio\LaravelAccess\Models;
 
+use AM2Studio\LaravelAccess\Traits\AccessModel;
 use Illuminate\Database\Eloquent\Model;
-use InvalidArgumentException;
 
 class Permission extends Model  {
+
+    use AccessModel;
 
     /**
      * The database table used by the model.
@@ -41,16 +43,5 @@ class Permission extends Model  {
      * @var array
      */
     protected $dates = [];
-
-    public static function create(array $attributes = [])
-    {
-        if(!isset($attributes['model']) || !$attributes['model'] instanceof Model) {
-            throw new InvalidArgumentException('Parameter "model" must be an instance of Eloquent model!');
-        }
-
-        $attributes['model'] = get_class($attributes['model']);
-
-        return parent::create($attributes);
-    }
 
 }

@@ -1,6 +1,6 @@
 {
     "name": "am2studio/laravel-access",
-    "description": "Roles and permissions package",
+    "description": "Permission package",
     "type": "library",
     "license": "MIT",
     "authors": [

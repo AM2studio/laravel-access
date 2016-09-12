@@ -5,8 +5,17 @@ namespace AM2Studio\LaravelAccess;
 use AM2Studio\LaravelAccess\Models\Permission;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class AM2StudioLaravelAccess
+ * @package AM2Studio\LaravelAccess
+ */
 class AM2StudioLaravelAccess
 {
+    /**
+     * @param $permission
+     * @param null $model
+     * @return bool
+     */
     public function permissionHasModel($permission, $model = null)
     {
         $permission = Permission::find($permission);
@@ -16,6 +25,10 @@ class AM2StudioLaravelAccess
         return true;
     }
 
+    /**
+     * @param null $model
+     * @return null|string
+     */
     public function getClassName($model = null)
     {
         if($model instanceof Model) {
@@ -25,6 +38,10 @@ class AM2StudioLaravelAccess
         return $model;
     }
 
+    /**
+     * @param null $model
+     * @return mixed
+     */
     public function getPermissions($model = null)
     {
         if(!$model) {

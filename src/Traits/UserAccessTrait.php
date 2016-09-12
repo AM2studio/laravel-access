@@ -7,8 +7,15 @@ use AM2Studio\LaravelAccess\Models\Permission;
 use Illuminate\Database\Eloquent\Model;
 use InvalidArgumentException;
 
+/**
+ * Class UserAccessTrait
+ * @package AM2Studio\LaravelAccess\Traits
+ */
 trait UserAccessTrait
 {
+    /**
+     * @return mixed
+     */
     public function permissions()
     {
         return $this->belongsToMany(Permission::class, 'user_permission', 'user_id', 'permission_id')
@@ -16,6 +23,11 @@ trait UserAccessTrait
             ->withPivot('model_id');
     }
 
+    /**
+     * @param $permission
+     * @param null $model
+     * @return bool
+     */
     public function attachPermission($permission, $model = null)
     {
         $attributes = [];
@@ -31,6 +43,11 @@ trait UserAccessTrait
         return (!$this->hasPermission($permission, $model)) ? $this->permissions()->attach($permission, $attributes) : true;
     }
 
+    /**
+     * @param $permission
+     * @param null $model
+     * @return mixed
+     */
     public function detachPermission($permission, $model = null)
     {
         $attributes = [];
@@ -50,6 +67,11 @@ trait UserAccessTrait
         }
     }
 
+    /**
+     * @param $permission
+     * @param null $model
+     * @return mixed
+     */
     public function hasPermission($permission, $model = null)
     {
         return $this->permissions->contains(function($value) use ($permission, $model) {

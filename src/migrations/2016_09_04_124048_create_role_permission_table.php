@@ -20,12 +20,13 @@ class CreateRolePermissionTable extends Migration
                 ->references('id')->on('roles')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+            $table->unsignedInteger('role_model_id')->nullable();
             $table->unsignedInteger('permission_id');
             $table->foreign('permission_id')
                 ->references('id')->on('permissions')
                 ->onDelete('restrict')
                 ->onUpdate('cascade');
-            $table->unsignedInteger('model_id')->nullable();
+            $table->unsignedInteger('permission_model_id')->nullable();
             $table->timestamps();
         });
     }

@@ -60,6 +60,6 @@ trait HasRolesAndPermissions
     public function hasPermission($permission, $model = null)
     {
         return $this->permissions->contains(function($value, $key) use ($permission, $model){
-            return ($permission == $value->id || str_is($permission, $value->slug)) && Access::getClassName($model); }); }
-
+            return ($permission == $value->id || str_is($permission, $value->slug)) && Access::getClassName($model); });
+    }
 }

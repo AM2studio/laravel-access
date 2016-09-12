@@ -11,5 +11,10 @@
     ],
     "minimum-stability": "dev",
     "require": {},
-    "require-dev": {}
+    "require-dev": {},
+    "autoload": {
+        "psr-4": {
+            "AM2Studio\\LaravelAccess\\": "src/"
+        }
+    }
 }

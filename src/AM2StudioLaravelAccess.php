@@ -4,6 +4,7 @@ namespace AM2Studio\LaravelAccess;
 
 use AM2Studio\LaravelAccess\Models\Permission;
 use AM2Studio\LaravelAccess\Models\Role;
+use Illuminate\Database\Eloquent\Model;
 
 class AM2StudioLaravelAccess
 {
@@ -27,9 +28,21 @@ class AM2StudioLaravelAccess
 
     public function getClassName($model = null)
     {
-        if($model) {
+        if($model instanceof Model) {
             return get_class($model);
         }
-        return null;
+
+        return $model;
+    }
+
+    public function getPermissions($model = null)
+    {
+        if(!$model) {
+            return Permission::whereNotNull('model')->get();
+        }
+
+        $className = $this->getClassName($model);
+
+        return Permission::where('model', $className)->get();
     }
 }

@@ -21,7 +21,7 @@ class Permission extends Model  {
      *
      * @var array
      */
-    protected $fillable = ['name', 'slug', 'description', 'model'];
+    protected $fillable = ['name', 'slug', 'description', 'model', 'group'];
 
     /**
      * The attributes excluded from the model's JSON form.

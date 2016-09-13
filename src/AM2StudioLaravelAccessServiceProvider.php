@@ -24,7 +24,7 @@ class AM2StudioLaravelAccessServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/config/access.php' => config_path('access.php'),
-        ]);
+        ], 'config');
 
         $this->publishes([
             __DIR__.'/migrations/' => database_path('migrations'),

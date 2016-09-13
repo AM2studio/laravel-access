@@ -74,7 +74,7 @@ trait UserAccessTrait
      */
     public function hasPermission($permission, $model = null)
     {
-        return $this->permissions->contains(function($value) use ($permission, $model) {
+        return $this->permissions->contains(function($key, $value) use ($permission, $model) {
             if ($permission == $value->id || str_is($permission, $value->slug)) {
                 if ($model) {
                     return Access::getClassName($model) === $value->model && $value->pivot->model_id === $model->getKey();

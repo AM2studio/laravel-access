@@ -13,11 +13,22 @@ class AM2StudioLaravelAccessServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->loadMigrationsFrom(__DIR__.'/migrations');
+        $laravel = app();
+        $version = $laravel::VERSION;
+        $version = trim(str_replace('(LTS)', '', $version));
+        list($major, $minor, $patch) = explode('.', $version);
+
+        if(3 <= $minor) {
+            $this->loadMigrationsFrom(__DIR__.'/migrations');
+        }
 
         $this->publishes([
             __DIR__.'/config/access.php' => config_path('access.php'),
         ]);
+
+        $this->publishes([
+            __DIR__.'/migrations/' => database_path('migrations'),
+        ], 'migrations');
     }
 
     /**

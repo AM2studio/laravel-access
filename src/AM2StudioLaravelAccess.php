@@ -44,6 +44,15 @@ class AM2StudioLaravelAccess
      */
     public function getPermissions($model = null)
     {
+        return Permission::all();
+    }
+
+    /**
+     * @param null $model
+     * @return mixed
+     */
+    public function getPermissionsByModel($model = null)
+    {
         if(!$model) {
             return Permission::whereNotNull('model')->get();
         }
@@ -51,5 +60,14 @@ class AM2StudioLaravelAccess
         $className = $this->getClassName($model);
 
         return Permission::where('model', $className)->get();
+    }
+
+    /**
+     * @param $group
+     * @return mixed
+     */
+    public function getPermissionsByGroup($group)
+    {
+        return Permission::where('group', $group)->get();
     }
 }

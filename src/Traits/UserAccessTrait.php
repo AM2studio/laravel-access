@@ -70,6 +70,20 @@ trait UserAccessTrait
     /**
      * @param $permission
      * @param null $model
+     * @return bool|mixed
+     */
+    public function togglePermission($permission, $model = null)
+    {
+        if($this->hasPermission($permission, $model)) {
+            return $this->detachPermission($permission, $model);
+        } else {
+            return $this->attachPermission($permission, $model);
+        }
+    }
+
+    /**
+     * @param $permission
+     * @param null $model
      * @return mixed
      */
     public function hasPermission($permission, $model = null)

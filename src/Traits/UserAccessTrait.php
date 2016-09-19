@@ -32,12 +32,14 @@ trait UserAccessTrait
     {
         $attributes = [];
 
-        if(!Access::permissionHasModel($permission, $model)) {
-            throw new InvalidArgumentException('Selected permission does not match selected model!');
-        }
-
         if($model instanceof Model) {
+            if(!Access::permissionHasModel($permission, $model)) {
+                throw new InvalidArgumentException('Selected permission does not match selected model!');
+            }
+
             $attributes['model_id'] = $model->getKey();
+        } elseif($model) {
+            $attributes['model_id'] = $model;
         }
 
         return (!$this->hasPermission($permission, $model)) ? $this->permissions()->attach($permission, $attributes) : true;
@@ -50,18 +52,20 @@ trait UserAccessTrait
      */
     public function detachPermission($permission, $model = null)
     {
-        $attributes = [];
-
-        if(!Access::permissionHasModel($permission, $model)) {
-            throw new InvalidArgumentException('Selected permission does not match selected model!');
-        }
+        $modelId = null;
 
         if($model instanceof Model) {
-            $attributes['model_id'] = $model->getKey();
+            if(!Access::permissionHasModel($permission, $model)) {
+                throw new InvalidArgumentException('Selected permission does not match selected model!');
+            }
+
+            $modelId = $model->getKey();
+        } elseif($model) {
+            $modelId = $model;
         }
 
         if($model) {
-            return $this->permissions()->newPivotStatementForId($permission)->where('model_id', $model->getKey())->delete();
+            return $this->permissions()->newPivotStatementForId($permission)->where('model_id', $modelId)->delete();
         } else {
             return $this->permissions()->detach($permission);
         }
@@ -91,7 +95,11 @@ trait UserAccessTrait
         return $this->permissions->contains(function($key, $value) use ($permission, $model) {
             if ($permission == $value->id || str_is($permission, $value->slug)) {
                 if ($model) {
-                    return Access::getClassName($model) === $value->model && $value->pivot->model_id === $model->getKey();
+                    if($model instanceof Model) {
+                        return Access::getClassName($model) == $value->model && $value->pivot->model_id == $model->getKey();
+                    } else {
+                        return $value->pivot->model_id == $model;
+                    }
                 }
                 return true;
             }

@@ -54,7 +54,7 @@ class AM2StudioLaravelAccess
     public function getPermissionsByModel($model = null)
     {
         if(!$model) {
-            return Permission::whereNotNull('model')->get();
+            return Permission::whereNull('model')->get();
         }
 
         $className = $this->getClassName($model);
